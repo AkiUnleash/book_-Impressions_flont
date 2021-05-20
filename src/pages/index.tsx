@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../assets/styles/Home.module.css'
 import Link from 'next/link'
-import Layout from '../components/MyLayout'
+import Layout from '../components/templates/MyLayout'
 
 export default function Home() {
   return (
