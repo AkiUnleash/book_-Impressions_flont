@@ -26,3 +26,11 @@ export const signupHandler = async (props: props) => {
     withCredentials: true
   })
 }
+
+// Logout
+export const logoutHandler = async () => {
+  return await axios.post('http://localhost:8082/account/logout', {}, {
+    xsrfHeaderName: 'X-CSRF-Token',
+    withCredentials: true
+  })
+}
