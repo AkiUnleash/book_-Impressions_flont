@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
 import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -135,7 +136,6 @@ const Signup: React.FC = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -161,13 +161,13 @@ const Signup: React.FC = () => {
             color="primary"
             className={classes.submit}
           >
-            ログイン
+            登録
           </Button>
           <Grid container justify="center">
             <Grid item>
-              {/* <Link to="/signup">
-                {"ユーザー登録はこちらへ"}
-              </Link> */}
+              <Link href="/login">
+                ログインはこちらへ
+              </Link>
             </Grid>
           </Grid>
         </form>

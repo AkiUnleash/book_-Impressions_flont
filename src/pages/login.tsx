@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
 import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +14,6 @@ import Container from '@material-ui/core/Container';
 import { loginHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
-import { throws } from 'assert/strict';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -143,9 +143,9 @@ const Login: React.FC = () => {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              {/* <Link to="/signup">
-                {"ユーザー登録はこちらへ"}
-              </Link> */}
+              <Link href="/signup">
+                ユーザー登録はこちらへ
+              </Link>
             </Grid>
           </Grid>
         </form>
