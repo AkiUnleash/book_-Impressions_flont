@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
+import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,9 +11,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { login_handler, signupHandler } from '../common/backend/auth'
+import { loginHandler, signupHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
+import { sign } from 'crypto';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -68,16 +71,26 @@ const Signup: React.FC = () => {
       return
     }
 
+    // サインイン処理
     try {
 
       const signinResult = await signupHandler({ email, password, username })
-      console.log(signinResult);
+      let responseType = signinResult.status.toString().slice(0, 1)
+      if (responseType !== '2') {
+        throw (signinResult)
+      }
 
-      const loginResult = await login_handler({ email, password })
-      console.log(loginResult);
+      const loginResult = await loginHandler({ email, password })
+      responseType = loginResult.status.toString().slice(0, 1)
+      if (responseType !== '2') {
+        throw (loginResult)
+      } else {
+        Router.push('/home')
+      }
 
     } catch (e) {
       setError(await errorResponse(e))
+      return
     }
   }
 
@@ -123,7 +136,6 @@ const Signup: React.FC = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -149,13 +161,13 @@ const Signup: React.FC = () => {
             color="primary"
             className={classes.submit}
           >
-            ログイン
+            登録
           </Button>
           <Grid container justify="center">
             <Grid item>
-              {/* <Link to="/signup">
-                {"ユーザー登録はこちらへ"}
-              </Link> */}
+              <Link href="/login">
+                ログインはこちらへ
+              </Link>
             </Grid>
           </Grid>
         </form>
