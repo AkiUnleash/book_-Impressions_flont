@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import { loginHandler, signupHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
+import { sign } from 'crypto';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -68,16 +70,26 @@ const Signup: React.FC = () => {
       return
     }
 
+    // サインイン処理
     try {
 
       const signinResult = await signupHandler({ email, password, username })
-      console.log(signinResult);
+      let responseType = signinResult.status.toString().slice(0, 1)
+      if (responseType !== '2') {
+        throw (signinResult)
+      }
 
       const loginResult = await loginHandler({ email, password })
-      console.log(loginResult);
+      responseType = loginResult.status.toString().slice(0, 1)
+      if (responseType !== '2') {
+        throw (loginResult)
+      } else {
+        Router.push('/home')
+      }
 
     } catch (e) {
       setError(await errorResponse(e))
+      return
     }
   }
 
