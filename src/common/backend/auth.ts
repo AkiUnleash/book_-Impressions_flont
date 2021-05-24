@@ -6,7 +6,7 @@ type props = {
   username?: string
 }
 
-export const login_handler = async (props: props) => {
+export const loginHandler = async (props: props) => {
   return await fetch(process.env.NEXT_PUBLIC_API_LOGIN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

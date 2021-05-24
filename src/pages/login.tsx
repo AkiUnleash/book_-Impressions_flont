@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { login_handler } from '../common/backend/auth'
+import { loginHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
 
@@ -68,7 +68,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const loginResult = await login_handler({ email, password })
+      const loginResult = await loginHandler({ email, password })
       console.log(loginResult);
     } catch (e) {
       setError(await errorResponse(e))

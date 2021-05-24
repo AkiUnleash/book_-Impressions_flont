@@ -9,7 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { login_handler, signupHandler } from '../common/backend/auth'
+import { loginHandler, signupHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
 
@@ -73,7 +73,7 @@ const Signup: React.FC = () => {
       const signinResult = await signupHandler({ email, password, username })
       console.log(signinResult);
 
-      const loginResult = await login_handler({ email, password })
+      const loginResult = await loginHandler({ email, password })
       console.log(loginResult);
 
     } catch (e) {
