@@ -24,6 +24,7 @@ export const signupHandler = async (props: props) => {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     body: JSON.stringify({
+      name: props.username,
       email: props.email,
       password: props.password
     })
