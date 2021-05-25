@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -27,24 +28,36 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Bookcard() {
+type props = {
+  id: string,
+  title: string,
+  author: string,
+  imageurl: string
+}
+
+const Bookcard = (props: props) => {
+
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="http://books.google.com/books/content?id=8m5qBgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <ThemeProvider theme={theme}>
-            <Typography variant="h2" component="h2"> 本のタイトル </Typography>
-            <Typography variant="body2" color="textSecondary" component="p"> 感想文の書き出し </Typography>
-          </ThemeProvider>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Link href={{ pathname: 'bookwrite', query: { id: props.id } }}>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={props.imageurl}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <ThemeProvider theme={theme}>
+              <Typography variant="h2" component="h2">{props.title}</Typography>
+              <Typography variant="body2" color="textSecondary" component="p">{props.author}</Typography>
+            </ThemeProvider>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Link>
   );
 }
+
+export default Bookcard
