@@ -40,12 +40,13 @@ const Bookcard = (props: props) => {
   const classes = useStyles();
 
   return (
-    <Link href={{ pathname: 'bookwrite', query: { id: props.id } }}>
+    <Link href={`bookwrite/${props.id}`}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
+            component="img"
             className={classes.media}
-            image={props.imageurl}
+            src={props.imageurl}
             title="Contemplative Reptile"
           />
           <CardContent>
