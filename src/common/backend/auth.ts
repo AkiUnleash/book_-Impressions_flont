@@ -39,3 +39,12 @@ export const logoutHandler = async () => {
     credentials: 'include'
   })
 }
+
+// NowData
+export const nowdataGet = async () => {
+  return await fetch(process.env.NEXT_PUBLIC_API_NOWDATA, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+}

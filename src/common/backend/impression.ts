@@ -20,3 +20,11 @@ export const impressionRegister = async (props: props) => {
     })
   })
 }
+
+export const impressionsRead = async () => {
+  return await fetch(process.env.NEXT_PUBLIC_API_IMPRESSION, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+}

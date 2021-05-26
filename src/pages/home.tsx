@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +8,8 @@ import Container from '@material-ui/core/Container';
 import Header from '../components/templates/Header';
 import Bookcard from '../components/organisms/Bookcard';
 import Button from '@material-ui/core/Button';
-import Link from 'next/link'
+import { impressionsRead } from '../common/backend/impression'
+import { nowdataGet } from '../common/backend/auth'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+type impression = {
+  bookid: string,
+  booktitle: string,
+  imageurl: string,
+  title: string,
+}
+
 
 const Home: React.FC = () => {
 
@@ -34,6 +42,32 @@ const Home: React.FC = () => {
 
   // Hooks 
   const [username, setUsername] = useState('')
+  const [impression, setImpression] = useState<impression[]>([])
+
+  const bookData = async () => {
+
+    const result = await impressionsRead()
+    const data = await result.json();
+
+    setImpression(data);
+  }
+
+  const userData = async () => {
+
+    const result = await nowdataGet()
+    const data = await result.json();
+
+    setUsername(data.username);
+  }
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      bookData()
+      userData()
+    }
+    return () => { isMounted = false }
+  }, [])
 
   return (
     <>
@@ -51,7 +85,7 @@ const Home: React.FC = () => {
                   height={300}
                 />
               </div>
-              <Typography className={classes.username}>Username</Typography>
+              <Typography className={classes.username}>{username}</Typography>
               <Button className={classes.button} variant="contained">プロフィールの編集</Button>
             </Grid>
           </Grid>
@@ -59,33 +93,18 @@ const Home: React.FC = () => {
 
           <Grid item xs={9}>
             <Grid container spacing={2}>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
-              <Grid item xs={3}>
-                <Bookcard />
-              </Grid>
+              {impression.map((i, index) => {
+                return (
+                  <Grid item xs={3} key={index}>
+                    <Bookcard
+                      id={i.bookid}
+                      title={i.booktitle}
+                      author={i.title}
+                      imageurl={i.imageurl}
+                    />
+                  </Grid>
+                )
+              })}
             </Grid>
           </Grid>
         </Grid>
