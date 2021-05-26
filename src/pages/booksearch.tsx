@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -9,7 +8,6 @@ import Header from '../components/templates/Header';
 import Bookcard from '../components/organisms/Bookcard';
 import TextField from '@material-ui/core/TextField';
 import { searchHandler } from '../common/serch/googleapi'
-import Link from 'next/link'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,10 +42,9 @@ const Home: React.FC = () => {
   // Click Handler
   const sumitHundler = async (e) => {
     e.preventDefault()
-    console.log(keyword);
-
+    const maxResults = 40
     try {
-      const searchResult = await searchHandler({ keyword })
+      const searchResult = await searchHandler({ keyword, maxResults })
       const data = await searchResult.json();
       setResult(data.items);
     } catch (e) {
@@ -99,11 +96,9 @@ const Home: React.FC = () => {
 
           <Grid item xs={12}>
             <Grid container spacing={2}>
-              {console.log(result)}
-
-              {result.map(item => {
+              {result.map((item, index) => {
                 return (
-                  <Grid item xs={3}>
+                  <Grid item xs={3} key={index}>
                     <Bookcard
                       id={item.id}
                       title={item.volumeInfo.title}
