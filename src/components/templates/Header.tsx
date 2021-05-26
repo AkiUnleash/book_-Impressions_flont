@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router'
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -37,6 +38,8 @@ const Header: React.FC = () => {
 
     // ログイン処理
     logoutHandler()
+
+    Router.push('/login')
   }
 
   return (
@@ -49,6 +52,13 @@ const Header: React.FC = () => {
           noWrap
           className={classes.toolbarTitle}>
           技術書籍感想文（仮） </Typography>
+
+        <Button href="#"
+          color="primary"
+          variant="outlined"
+          className={classes.link}
+          onClick={() => { Router.push('/booksearch') }}>
+          感想文を書く </Button>
 
         <Button href="#"
           color="primary"
