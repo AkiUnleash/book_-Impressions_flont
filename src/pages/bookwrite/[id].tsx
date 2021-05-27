@@ -60,13 +60,14 @@ export default function Output() {
         title: title,
         body: value
       })
-      console.log(await inputResult);
       const responseType = inputResult.status.toString().slice(0, 1)
+
       if (responseType !== '2') {
         throw (inputResult)
       } else {
         Router.push('/home')
       }
+
     } catch (e) {
       return
     }
