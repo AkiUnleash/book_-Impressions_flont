@@ -2,24 +2,10 @@ import Router from 'next/router'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Layout from '../components/templates/Layout'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,45 +38,49 @@ export default function SignInSide() {
   const classes = useStyles();
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5}  >
+    <Layout
+      title={"技術書籍感想文（仮）"}
+      Header={false}>
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5}  >
 
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h5" className={classes.title}>
-            技術書籍感想文（仮）
+          <div className={classes.paper}>
+            <Typography component="h1" variant="h5" className={classes.title}>
+              技術書籍感想文（仮）
           </Typography>
-          <Alert>
-            <AlertTitle>どんなサイト？</AlertTitle>
-            <p>技術書籍の感想文を残すためのサイトです。</p>
-            <p>アウトプットをして知識を深めましょう。</p>
-          </Alert>
+            <Alert>
+              <AlertTitle>どんなサイト？</AlertTitle>
+              <p>技術書籍の感想文を残すためのサイトです。</p>
+              <p>アウトプットをして知識を深めましょう。</p>
+            </Alert>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => {
-              Router.push('/login')
-            }} >
-            サインイン </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => {
+                Router.push('/login')
+              }} >
+              サインイン </Button>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-            onClick={() => {
-              Router.push('/signup')
-            }}
-          >
-            アカウントの登録
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+              onClick={() => {
+                Router.push('/signup')
+              }}
+            >
+              アカウントの登録
           </Button>
-        </div>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </Layout>
   );
 }

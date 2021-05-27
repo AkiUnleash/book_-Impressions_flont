@@ -2,13 +2,13 @@ import Router from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { searchHandler } from '../../common/serch/googleapi'
-import Header from '../../components/templates/Header';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { MarkDownEditor } from '../../components/templates/MarkDownEditor';
 import Button from '@material-ui/core/Button';
 import { impressionRegister } from '../../common/backend/impression'
+import Layout from '../../components/templates/Layout'
 
 type book = {
   id: string
@@ -85,10 +85,11 @@ export default function Output() {
   }, [id])
 
   return (
-    <>
-      <Header />
-      <Container maxWidth="md">
+    <Layout
+      title={`${result.title}｜投稿｜技術書籍感想文（仮）`}
+      Header={true}>
 
+      <Container maxWidth="md">
         <form
           noValidate
           onSubmit={((e) => { submitHundler(e) })}>
@@ -136,6 +137,7 @@ export default function Output() {
           </Grid>
         </form>
       </Container>
-    </>
+
+    </Layout>
   )
 }

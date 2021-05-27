@@ -4,11 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Header from '../components/templates/Header';
 import Bookcard from '../components/organisms/Bookcard';
 import TextField from '@material-ui/core/TextField';
 import { searchHandler } from '../common/serch/googleapi'
-
+import Layout from '../components/templates/Layout'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -53,8 +52,10 @@ const Home: React.FC = () => {
   }
 
   return (
-    <>
-      <Header />
+    <Layout
+      title={"本の検索｜技術書籍感想文（仮）"}
+      Header={true}>
+
       <Container maxWidth="md">
         <CssBaseline />
         <Grid container justify="center" className={classes.container}>
@@ -114,7 +115,8 @@ const Home: React.FC = () => {
           </Grid>
         </Grid>
       </Container>
-    </>
+
+    </Layout>
   );
 }
 

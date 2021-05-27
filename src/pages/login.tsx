@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -14,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import { loginHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
+import Layout from '../components/templates/Layout'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -86,71 +86,76 @@ const Login: React.FC = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+    <Layout
+      title={"ログイン｜技術書籍感想文（仮）"}
+      Header={false}>
 
-        {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
+      <Container component="main" maxWidth="xs">
 
-        <Typography component="h1" variant="h5">
-          サインイン
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+
+          {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
+
+          <Typography component="h1" variant="h5">
+            サインイン
         </Typography>
 
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={((e) => { sumitHundler(e) })}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={((e) => { sumitHundler(e) })}>
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            ログイン
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              ログイン
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="/signup">
-                ユーザー登録はこちらへ
+            <Grid container justify="center">
+              <Grid item>
+                <Link href="/signup">
+                  ユーザー登録はこちらへ
               </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container >
+          </form>
+        </div>
+      </Container >
+    </Layout>
   );
 }
 
