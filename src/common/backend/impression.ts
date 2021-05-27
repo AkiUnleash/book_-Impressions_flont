@@ -7,7 +7,7 @@ type props = {
 }
 
 export const impressionRegister = async (props: props) => {
-  return await fetch(process.env.NEXT_PUBLIC_API_IMPRESSION, {
+  return await fetch(process.env.NEXT_PUBLIC_API_IMPRESSIONS, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
