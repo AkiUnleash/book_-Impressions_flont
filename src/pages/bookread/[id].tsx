@@ -29,10 +29,11 @@ export default function Output() {
     title: "",
     body: "",
   })
+  const [id, setId] = useState<string>()
 
   const impressionData = async () => {
 
-    const id = `${router.query.id}`.toString()
+    if (id === undefined) { return }
     const searchResult = await impressionRead(id)
     const data = await searchResult.json();
 
@@ -40,9 +41,15 @@ export default function Output() {
   }
 
   useEffect(() => {
+    if (router.asPath !== router.route) {
+      setId((router.query.id).toString());
+    }
+  }, [router]);
+
+  useEffect(() => {
     impressionData()
     return () => { impressionData() }
-  }, [])
+  }, [id])
 
   return (
     <>

@@ -24,6 +24,7 @@ export default function Output() {
   const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "" })
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
+  const [id, setId] = useState<string>()
 
   const onChange = (value: string) => {
     setValue(value);
@@ -31,7 +32,9 @@ export default function Output() {
 
   const bookData = async () => {
 
-    const keyword = `${router.query.id}`
+    if (id === undefined) { return }
+
+    const keyword = id
     const maxResults = 0
     const searchResult = await searchHandler({ keyword, maxResults })
     const data = await searchResult.json();
@@ -71,9 +74,15 @@ export default function Output() {
   }
 
   useEffect(() => {
+    if (router.asPath !== router.route) {
+      setId((router.query.id).toString());
+    }
+  }, [router]);
+
+  useEffect(() => {
     bookData()
     return () => { bookData() }
-  }, [])
+  }, [id])
 
   return (
     <>
