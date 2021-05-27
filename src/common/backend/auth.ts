@@ -2,7 +2,7 @@ import axios from 'axios'
 
 type props = {
   email: string,
-  password: string
+  password?: string
   username?: string
 }
 
@@ -46,5 +46,18 @@ export const nowdataGet = async () => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include'
+  })
+}
+
+// NowData
+export const nowdataUpdate = async (props: props) => {
+  return await fetch(process.env.NEXT_PUBLIC_API_NOWDATA, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      username: props.username,
+      email: props.email,
+    })
   })
 }
