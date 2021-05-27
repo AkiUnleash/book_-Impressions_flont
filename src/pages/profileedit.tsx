@@ -9,9 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { isEmail, isUsername } from '../common/validation/validation'
-import Header from '../components/templates/Header';
 import { nowdataGet, nowdataUpdate } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
+import Layout from '../components/templates/Layout'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -100,9 +100,10 @@ const ProfileEdit: React.FC = () => {
   }, [])
 
   return (
-    <>
 
-      <Header />
+    <Layout
+      title={"プロフィールの編集｜技術書籍感想文（仮）"}
+      Header={true}>
 
       <Container component="main" maxWidth="xs">
         <Grid container justify="center">
@@ -168,7 +169,8 @@ const ProfileEdit: React.FC = () => {
           </Grid>
         </form>
       </Container >
-    </>
+
+    </Layout>
   );
 }
 
