@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 type props = {
+  path: string,
   id: string,
   title: string,
   author: string,
@@ -40,7 +41,7 @@ const Bookcard = (props: props) => {
   const classes = useStyles();
 
   return (
-    <Link href={`bookwrite/${props.id}`}>
+    <Link href={`${props.path}/${props.id}`}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia

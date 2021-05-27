@@ -100,6 +100,7 @@ const Home: React.FC = () => {
                 return (
                   <Grid item xs={3} key={index}>
                     <Bookcard
+                      path={"bookwrite"}
                       id={item.id}
                       title={item.volumeInfo.title}
                       author={item.volumeInfo.authors}
