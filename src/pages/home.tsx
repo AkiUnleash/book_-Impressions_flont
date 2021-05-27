@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type impression = {
+  id: string,
   bookid: string,
   booktitle: string,
   imageurl: string,
@@ -97,7 +98,8 @@ const Home: React.FC = () => {
                 return (
                   <Grid item xs={3} key={index}>
                     <Bookcard
-                      id={i.bookid}
+                      path={'bookread'}
+                      id={i.id}
                       title={i.booktitle}
                       author={i.title}
                       imageurl={i.imageurl}
