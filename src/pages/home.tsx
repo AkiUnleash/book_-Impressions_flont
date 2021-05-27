@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Router from 'next/router'
 import Image from 'next/image'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -87,7 +88,11 @@ const Home: React.FC = () => {
                 />
               </div>
               <Typography className={classes.username}>{username}</Typography>
-              <Button className={classes.button} variant="contained">プロフィールの編集</Button>
+              <Button
+                className={classes.button}
+                variant="contained"
+                onClick={() => { Router.push('/profileedit') }}
+              >プロフィールの編集</Button>
             </Grid>
           </Grid>
 

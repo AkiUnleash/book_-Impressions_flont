@@ -18,3 +18,13 @@ export const isEmail = (props: string) => {
   }
   return ""
 }
+
+export const isUsername = (props: string) => {
+  console.log(props);
+
+  // 半角英数字混合の７文字以上j
+  if (props === "") {
+    return "ユーザー名は、空白禁止です。"
+  }
+  return ""
+}
