@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
+import Router from 'next/router'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -9,9 +10,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { login_handler } from '../common/backend/auth'
+import { loginHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
+import Layout from '../components/templates/Layout'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -67,80 +69,93 @@ const Login: React.FC = () => {
       return
     }
 
+    // ログイン
     try {
-      const loginResult = await login_handler({ email, password })
-      console.log(loginResult);
+      const loginResult = await loginHandler({ email, password })
+      const responseType = loginResult.status.toString().slice(0, 1)
+      if (responseType !== '2') {
+        throw (loginResult)
+      } else {
+        Router.push('/home')
+      }
     } catch (e) {
       setError(await errorResponse(e))
+      return
     }
+
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+    <Layout
+      title={"ログイン｜技術書籍感想文（仮）"}
+      Header={false}>
 
-        {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
+      <Container component="main" maxWidth="xs">
 
-        <Typography component="h1" variant="h5">
-          サインイン
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+
+          {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
+
+          <Typography component="h1" variant="h5">
+            サインイン
         </Typography>
 
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={((e) => { sumitHundler(e) })}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={((e) => { sumitHundler(e) })}>
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            ログイン
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              ログイン
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              {/* <Link to="/signup">
-                {"ユーザー登録はこちらへ"}
-              </Link> */}
+            <Grid container justify="center">
+              <Grid item>
+                <Link href="/signup">
+                  ユーザー登録はこちらへ
+              </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container >
+          </form>
+        </div>
+      </Container >
+    </Layout>
   );
 }
 
