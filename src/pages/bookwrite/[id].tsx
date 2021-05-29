@@ -9,19 +9,22 @@ import { MarkDownEditor } from '../../components/templates/MarkDownEditor';
 import Button from '@material-ui/core/Button';
 import { impressionRegister } from '../../common/backend/impression'
 import Layout from '../../components/templates/Layout'
+import BookInfomation from '../../components/templates/BookInfomation'
+
 
 type book = {
   id: string
   title: string,
   auther: string,
   imageurl: string,
+  description: string
 }
 
 export default function Output() {
 
   const router = useRouter();
 
-  const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "" })
+  const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "", description: "" })
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
   const [id, setId] = useState<string>()
@@ -43,7 +46,8 @@ export default function Output() {
       id: data.id,
       title: data.volumeInfo.title,
       auther: data.volumeInfo.authors,
-      imageurl: data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.smallThumbnail : ""
+      imageurl: data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.smallThumbnail : "",
+      description: data.volumeInfo.description,
     });
   }
 
@@ -51,7 +55,6 @@ export default function Output() {
   const submitHundler = async (e) => {
     e.preventDefault()
 
-    // 
     try {
       const inputResult = await impressionRegister({
         bookid: result.id,
@@ -95,17 +98,11 @@ export default function Output() {
           noValidate
           onSubmit={((e) => { submitHundler(e) })}>
 
-          {result.id && (
-            <Grid container justify="center">
-              <Grid item xs={3}>
-                <img src={result.imageurl} />
-              </Grid>
-              <Grid item xs={6}>
-                <div>{result.title}</div>
-                <div>{result.auther}</div>
-              </Grid>
-            </Grid>
-          )}
+          <BookInfomation
+            title={result.title}
+            auther={result.auther}
+            imageurl={result.imageurl}
+            description={result.description} />
 
           <TextField
             variant="outlined"
