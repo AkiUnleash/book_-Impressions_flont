@@ -103,19 +103,24 @@ const Home: React.FC = () => {
 
           <Grid item xs={9}>
             <Grid container spacing={2}>
-              {impression.map((i, index) => {
-                return (
-                  <Grid item xs={3} key={index}>
-                    <Bookcard
-                      path={'bookread'}
-                      id={i.id}
-                      title={i.booktitle}
-                      author={i.title}
-                      imageurl={i.imageurl}
-                    />
-                  </Grid>
-                )
-              })}
+              {impression[0] ?
+                (
+                  impression.map((i, index) => {
+                    return (
+                      <Grid item xs={3} key={index}>
+                        <Bookcard
+                          path={'bookread'}
+                          id={i.id}
+                          title={i.booktitle}
+                          author={i.title}
+                          imageurl={i.imageurl}
+                        />
+                      </Grid>
+                    )
+                  })) :
+                (
+                  <div>右上の［感想文を書く］ボタンを押して、感想文を書きましょう。</div>
+                )}
             </Grid>
           </Grid>
         </Grid>

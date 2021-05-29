@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'
 import Router from 'next/router'
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarTitle: {
     flexGrow: 1,
+    cursor: 'pointer'
   },
   link: {
     margin: theme.spacing(1, 1.5),
@@ -45,13 +47,14 @@ const Header: React.FC = () => {
   return (
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
+        <Link href={'/home'}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.toolbarTitle}> 技術書籍感想文（仮）</Typography>
 
-        <Typography
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.toolbarTitle}>
-          技術書籍感想文（仮） </Typography>
+        </Link>
 
         <Button href="#"
           color="primary"
@@ -67,8 +70,8 @@ const Header: React.FC = () => {
           onClick={async (e) => { clickHundler(e) }}>
           ログアウト </Button>
 
-      </Toolbar>
-    </AppBar>
+      </Toolbar >
+    </AppBar >
   );
 }
 
