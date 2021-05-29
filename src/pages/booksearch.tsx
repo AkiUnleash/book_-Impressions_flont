@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   search: {
     marginTop: 8,
     marginBottom: 32
+  },
+  guidance: {
+    textAlign: 'center'
   }
 }));
 
@@ -97,7 +100,7 @@ const Home: React.FC = () => {
 
           <Grid item xs={12}>
             <Grid container spacing={2}>
-              {result.map((item, index) => {
+              {result[0] ? (result.map((item, index) => {
                 return (
                   <Grid item xs={3} key={index}>
                     <Bookcard
@@ -109,7 +112,12 @@ const Home: React.FC = () => {
                     />
                   </Grid>
                 )
-              })}
+              })) :
+                (
+                  <Grid item xs={12} className={classes.guidance}>
+                    <div>感想文を書く本を検索してください。</div>
+                  </Grid>
+                )}
 
             </Grid>
           </Grid>
