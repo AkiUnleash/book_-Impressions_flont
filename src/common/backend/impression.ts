@@ -36,3 +36,11 @@ export const impressionRead = async (id: string) => {
     credentials: 'include'
   })
 }
+
+export const impressionDelete = async (id: string) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_IMPRESSION}/${id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+}
