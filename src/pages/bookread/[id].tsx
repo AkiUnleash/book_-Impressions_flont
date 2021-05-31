@@ -7,6 +7,7 @@ import { searchHandler } from '../../common/serch/googleapi'
 import marked from "marked";
 import Layout from '../../components/templates/Layout'
 import BookInfomation from '../../components/templates/BookInfomation'
+import EditMenu from '../../components/templates/EditMenu'
 
 type impression = {
   id: string,
@@ -56,6 +57,7 @@ export default function Output() {
     const BookResult = await searchHandler({ keyword, maxResults })
     const bookData = await BookResult.json();
 
+    if (bookData === undefined) { return }
     setBookinfomation({
       title: bookData.volumeInfo.title,
       auther: bookData.volumeInfo.authors,
@@ -65,14 +67,21 @@ export default function Output() {
   }
 
   useEffect(() => {
-    if (router.asPath !== router.route) {
-      setId((router.query.id).toString());
+    let isMounted = true;
+    if (isMounted) {
+      if (router.asPath !== router.route) {
+        setId((router.query.id).toString());
+      }
     }
+    return () => { isMounted = false }
   }, [router]);
 
   useEffect(() => {
-    impressionData()
-    return () => { impressionData() }
+    let isMounted = true;
+    if (isMounted) {
+      impressionData()
+    }
+    return () => { isMounted = false }
   }, [id])
 
   return (
@@ -82,27 +91,29 @@ export default function Output() {
 
       <Container maxWidth="md">
 
-        {impression.id && (
-          <>
-            <BookInfomation
-              title={bookinfomation.title}
-              auther={bookinfomation.auther}
-              imageurl={bookinfomation.imageurl}
-              description={bookinfomation.description} />
 
-            <Grid container justify="center">
-              <Grid item xs={12}>
-                <h1>{impression.title}</h1>
-              </Grid>
-            </Grid>
+        <BookInfomation
+          title={bookinfomation.title}
+          auther={bookinfomation.auther}
+          imageurl={bookinfomation.imageurl}
+          description={bookinfomation.description} />
 
-            <Grid container justify="center">
-              <Grid item xs={12}>
-                <span dangerouslySetInnerHTML={{ __html: marked(impression.body) }} />
-              </Grid>
-            </Grid>
-          </>
-        )}
+        <Grid container justify="flex-end">
+          <EditMenu
+            id={id} />
+        </Grid>
+
+        <Grid container justify="center">
+          <Grid item xs={12}>
+            <h1>{impression.title}</h1>
+          </Grid>
+        </Grid>
+
+        <Grid container justify="center">
+          <Grid item xs={12}>
+            <span dangerouslySetInnerHTML={{ __html: marked(impression.body) }} />
+          </Grid>
+        </Grid>
 
       </Container>
     </Layout>
