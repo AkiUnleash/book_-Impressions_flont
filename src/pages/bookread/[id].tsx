@@ -11,6 +11,7 @@ import EditMenu from '../../components/templates/EditMenu'
 
 type impression = {
   id: string,
+  bookid: string
   booktitle: string,
   imageurl: string,
   title: string,
@@ -29,6 +30,7 @@ export default function Output() {
   const router = useRouter();
   const [impression, setImpression] = useState<impression>({
     id: "",
+    bookid: "",
     booktitle: "",
     imageurl: "",
     title: "",
@@ -100,7 +102,8 @@ export default function Output() {
 
         <Grid container justify="flex-end">
           <EditMenu
-            id={id} />
+            id={id}
+            bookid={impression.bookid} />
         </Grid>
 
         <Grid container justify="center">

@@ -11,6 +11,7 @@ const ITEM_HEIGHT = 48;
 
 type props = {
   id: string,
+  bookid: string
 }
 
 export default function EditMenu(props: props) {
@@ -28,7 +29,7 @@ export default function EditMenu(props: props) {
   }
 
   const changeHandle = () => {
-    console.log('update');
+    Router.push(`/bookwrite/${props.bookid}`)
     setAnchorEl(null);
   };
 
