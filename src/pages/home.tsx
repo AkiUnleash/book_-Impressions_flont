@@ -113,7 +113,7 @@ const Home: React.FC = () => {
                 (
                   impression.map((i, index) => {
                     return (
-                      <Grid item md={3} sm={3} xs={12} key={index}>
+                      <Grid item md={3} sm={6} xs={12} key={index}>
                         <Bookcard
                           path={'bookread'}
                           id={i.id}

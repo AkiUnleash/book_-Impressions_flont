@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
   },
   image: {
-    marginRight: 32
+    marginRight: 32,
+    marginBottom: 32,
+    textAlign: 'center'
   },
   title: {
     fontSize: 20
@@ -37,10 +39,10 @@ const BookInfomation: React.FC<props> = (props: props) => {
 
   return (
     <Grid className={classes.container} container justify="center">
-      <Grid className={classes.image} item xs={3}>
+      <Grid className={classes.image} item md={3} sm={3} xs={12}>
         <img src={props.imageurl} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item md={7} sm={7} xs={12}>
         <div className={classes.title}>{props.title}</div>
         <div className={classes.auther}>{props.auther}</div>
         <div className={classes.description}>{props.description}</div>
