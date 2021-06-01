@@ -15,14 +15,20 @@ import Layout from '../components/templates/Layout'
 
 
 const useStyles = makeStyles((theme) => ({
+  infomation: {
+    display: "inline-block",
+    textAlign: "center",
+    paddingBottom: 32
+  },
   avatar: {
-    paddingTop: 24
+    paddingTop: 8
   },
   container: {
     padding: 24
   },
   username: {
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: 8
   },
   button: {
     margin: 'auto'
@@ -81,8 +87,8 @@ const Home: React.FC = () => {
       <Container maxWidth="md">
         <CssBaseline />
         <Grid container justify="center" className={classes.container}>
-          <Grid item xs={3}>
-            <Grid container justify="center">
+          <Grid item md={3} sm={3} xs={12}>
+            <Grid container justify="center" className={classes.infomation}>
               <div className={classes.avatar}>
                 <Image
                   src="/images/avatar.svg"
@@ -101,13 +107,13 @@ const Home: React.FC = () => {
           </Grid>
 
 
-          <Grid item xs={9}>
+          <Grid item md={9} sm={9} xs={12}>
             <Grid container spacing={2}>
               {impression[0] ?
                 (
                   impression.map((i, index) => {
                     return (
-                      <Grid item xs={3} key={index}>
+                      <Grid item md={3} sm={3} xs={12} key={index}>
                         <Bookcard
                           path={'bookread'}
                           id={i.id}
