@@ -10,9 +10,6 @@ import { searchHandler } from '../common/serch/googleapi'
 import Layout from '../components/templates/Layout'
 
 const useStyles = makeStyles((theme) => ({
-  avatar: {
-    paddingTop: 24
-  },
   container: {
     padding: 24
   },
@@ -62,12 +59,12 @@ const Home: React.FC = () => {
       <Container maxWidth="md">
         <CssBaseline />
         <Grid container justify="center" className={classes.container}>
-          <Grid item xs={12} className={classes.search}>
+          <Grid item md={12} sm={12} xs={12} className={classes.search}>
             <form
               noValidate
               onSubmit={((e) => { sumitHundler(e) })}>
               <Grid container justify="center" alignItems="center">
-                <Grid item xs={8}>
+                <Grid item md={8} sm={8} xs={12}>
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -82,7 +79,7 @@ const Home: React.FC = () => {
                     onChange={(e) => setKeyword(e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item md={1} sm={1} xs={5}>
                   <Button
                     type="submit"
                     fullWidth
@@ -94,15 +91,13 @@ const Home: React.FC = () => {
                 </Grid>
               </Grid>
             </form>
-
           </Grid>
 
-
-          <Grid item xs={12}>
+          <Grid item md={12} sm={12} xs={12}>
             <Grid container spacing={2}>
               {result[0] ? (result.map((item, index) => {
                 return (
-                  <Grid item xs={3} key={index}>
+                  <Grid item md={3} sm={6} xs={12} key={index}>
                     <Bookcard
                       path={"bookwrite"}
                       id={item.id}
@@ -124,7 +119,7 @@ const Home: React.FC = () => {
         </Grid>
       </Container>
 
-    </Layout>
+    </Layout >
   );
 }
 

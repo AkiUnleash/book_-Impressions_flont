@@ -18,15 +18,8 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.warning.main,
+    marginTop: 24
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -107,7 +100,8 @@ const ProfileEdit: React.FC = () => {
 
       <Container component="main" maxWidth="xs">
         <Grid container justify="center">
-          <Grid item xs={3}>
+          <Grid item xs={3} className={classes.avatar}
+          >
             <Image
               src="/images/avatar.svg"
               alt="Picture of the author"
