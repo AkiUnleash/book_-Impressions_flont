@@ -44,3 +44,26 @@ export const impressionDelete = async (id: string) => {
     credentials: 'include'
   })
 }
+
+export const impressionUpdate = async (id: string, props: props) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_IMPRESSION}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      bookid: props.bookid,
+      booktitle: props.booktitle,
+      imageurl: props.imageurl,
+      title: props.title,
+      body: props.body
+    })
+  })
+}
+
+export const impressionsSearch = async (bookid: string) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_IMPRESSIONS}/search?bookid=${bookid}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+}
