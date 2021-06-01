@@ -7,10 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { MarkDownEditor } from '../../components/templates/MarkDownEditor';
 import Button from '@material-ui/core/Button';
-import { impressionRegister } from '../../common/backend/impression'
+import { impressionRegister, impressionsSearch, impressionUpdate } from '../../common/backend/impression'
 import Layout from '../../components/templates/Layout'
 import BookInfomation from '../../components/templates/BookInfomation'
-
 
 type book = {
   id: string
@@ -25,19 +24,20 @@ export default function Output() {
   const router = useRouter();
 
   const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "", description: "" })
+  const [id, setID] = useState('')
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
-  const [id, setId] = useState<string>()
+  const [bookid, setBookId] = useState<string>()
+  const [flg, setFlg] = useState<'create' | 'update'>('create')
 
   const onChange = (value: string) => {
     setValue(value);
   };
 
   const bookData = async () => {
+    if (bookid === undefined) { return }
 
-    if (id === undefined) { return }
-
-    const keyword = id
+    const keyword = bookid
     const maxResults = 0
     const searchResult = await searchHandler({ keyword, maxResults })
     const data = await searchResult.json();
@@ -51,10 +51,24 @@ export default function Output() {
     });
   }
 
-  // Click Handler
-  const submitHundler = async (e) => {
-    e.preventDefault()
+  const impressionData = async () => {
+    if (bookid === undefined) { return }
 
+    const searchResult = await impressionsSearch(bookid)
+    const data = await searchResult.json();
+
+    const responseType = await searchResult.status.toString().slice(0, 1)
+    if (responseType == '2') {
+      await setID(data[0].id)
+      await setTitle(data[0].title)
+      await setValue(data[0].body)
+      await setFlg('update')
+    } else {
+      await setFlg('create')
+    }
+  }
+
+  const createHandler = async () => {
     try {
       const inputResult = await impressionRegister({
         bookid: result.id,
@@ -74,19 +88,61 @@ export default function Output() {
     } catch (e) {
       return
     }
+  }
 
+  const updateHandler = async () => {
+    try {
+      const inputResult = await impressionUpdate(
+        id,
+        {
+          bookid: result.id,
+          booktitle: result.title,
+          imageurl: result.imageurl,
+          title: title,
+          body: value
+        })
+      const responseType = inputResult.status.toString().slice(0, 1)
+
+      if (responseType !== '2') {
+        throw (inputResult)
+      } else {
+        Router.push('/home')
+      }
+
+    } catch (e) {
+      return
+    }
+  }
+
+  // Click Handler
+  const submitHundler = (e) => {
+    e.preventDefault()
+
+    if (flg == 'create') {
+      createHandler();
+    } else {
+      updateHandler();
+    }
   }
 
   useEffect(() => {
-    if (router.asPath !== router.route) {
-      setId((router.query.id).toString());
+    let isMounted = true;
+    if (isMounted) {
+      if (router.asPath !== router.route) {
+        setBookId((router.query.id).toString());
+      }
     }
+    return () => { isMounted = false }
   }, [router]);
 
   useEffect(() => {
-    bookData()
-    return () => { bookData() }
-  }, [id])
+    let isMounted = true;
+    if (isMounted) {
+      bookData()
+      impressionData()
+    }
+    return () => { isMounted = false }
+  }, [bookid])
 
   return (
     <Layout
