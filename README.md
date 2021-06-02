@@ -43,8 +43,6 @@
 
 - [データベース仕様書](https://cacoo.com/diagrams/5MgOFf1z3nImOLjF/95A3F)
 
-- [API 仕様書](https://docs.google.com/spreadsheets/d/1AHCkOTM2onoyZiDAALHW0c1clVFEsgJNe2G5teIIEM/edit?usp=sharing)
-
 - [キックオフ](https://drive.google.com/file/d/1FPf8qS8_9-phvvcSqlxaWNJepr4lX_Ff/view?usp=sharing)
 - [（詳細）仕様書](https://drive.google.com/file/d/1Yms36qpE3XEarAj4ApzjPpoOB6Uiq2X5/view?usp=sharing)
 
