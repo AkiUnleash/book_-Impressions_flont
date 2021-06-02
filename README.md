@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 技術書籍感想文（仮）
 
-## Getting Started
+[https://book-impressions-flont.vercel.app/](https://book-impressions-flont.vercel.app/)
 
-First, run the development server:
+技術書籍の感想を記述するための Web アプリケーション。  
+フロントエンドのリポジトリ。
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+※サーバサイドのリポジトリは以下です。  
+[book_Impressions_back](https://github.com/AkiUnleash/book_Impressions_back)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 説明
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+このアプリはシステム開発者をターゲットに作成している。そのため、感想文はマークアップ言語で記載する。
+記載した感想は記載した本人のユーザーしか閲覧することができないクローズドな環境。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## デモ
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![demo](https://user-images.githubusercontent.com/50258433/120408953-f77d0180-c38a-11eb-988d-3f168499f24e.gif)
 
-## Learn More
+## 機能
 
-To learn more about Next.js, take a look at the following resources:
+- サインアップ機能
+- ログイン/ログアウト機能
+- 感想文登録
+- 感想文閲覧
+- 感想文更新及び削除
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## システム・アーキテクチャ
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Typescript
+- Material-UI
+- Next.js
+- Vercel
+- react-simplemde-editor
 
-## Deploy on Vercel
+## 資料
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [システム・アーキテクチャ図](https://cacoo.com/diagrams/5MgOFf1z3nImOLjF/E8CEA)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [画面遷移図](https://cacoo.com/diagrams/5MgOFf1z3nImOLjF/EBE96?reload_rt=1620993344752_0)
+
+- [ワイヤーフレーム](https://www.figma.com/file/YB0P7UIoXzgTWu5Vllgpbc/Book-implesions?node-id=0%3A1)
+
+- [データベース仕様書](https://cacoo.com/diagrams/5MgOFf1z3nImOLjF/95A3F)
+
+- [API 仕様書](https://docs.google.com/spreadsheets/d/1AHCkOTM2onoyZiDAALHW0c1clVFEsgJNe2G5teIIEM/edit?usp=sharing)
+
+- [キックオフ](https://drive.google.com/file/d/1FPf8qS8_9-phvvcSqlxaWNJepr4lX_Ff/view?usp=sharing)
+- [（詳細）仕様書](https://drive.google.com/file/d/1Yms36qpE3XEarAj4ApzjPpoOB6Uiq2X5/view?usp=sharing)
+
+## ライセンス
+
+[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+
+## Author
+
+[Akio Yano](https://github.com/AkiUnleash)
