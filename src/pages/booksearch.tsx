@@ -41,6 +41,7 @@ const Home: React.FC = () => {
   // Click Handler
   const sumitHundler = async (e) => {
     e.preventDefault()
+    if (keyword.trim() === '') { return }
     const maxResults = 40
     try {
       const searchResult = await searchHandler({ keyword, maxResults })

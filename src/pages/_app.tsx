@@ -1,14 +1,40 @@
 import React from 'react';
+import Router from 'next/router'
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../common/theme';
+import { nowdataGet } from '../common/backend/auth'
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 
+  const chackLogin = async () => {
+    const response = await nowdataGet()
+    const status = response.status.toString();
+
+    if (
+      (status === '200') && (
+        Component.name == 'Top' ||
+        Component.name == 'Login' ||
+        Component.name == 'Signup')
+    ) {
+      Router.push('/home')
+    } else if (
+      (status === '401') && (
+        Component.name != 'Top' &&
+        Component.name != 'Login' &&
+        Component.name != 'Signup')
+    ) {
+      Router.push('/login')
+    }
+  }
+
   React.useEffect(() => {
+    // ログインチェック
+    chackLogin()
+
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
