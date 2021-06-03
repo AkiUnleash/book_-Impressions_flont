@@ -50,6 +50,8 @@ export default function Output() {
 
     if (id === undefined) { return }
     const impressionResult = await impressionRead(id)
+
+    if (impressionResult.status.toString() !== '200') { return }
     const impressionData = await impressionResult.json();
     setImpression(impressionData);
 

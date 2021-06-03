@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { loginHandler, signupHandler } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
-import { isEmail, isPassword } from '../common/validation/validation'
+import { isEmail, isPassword, isUsername } from '../common/validation/validation'
 import Layout from '../components/templates/Layout'
 
 function Alert(props) {
@@ -70,6 +70,12 @@ const Signup: React.FC = () => {
       setError(ErrorData)
       return
     }
+    ErrorData = isUsername(username)
+    if (ErrorData) {
+      setError(ErrorData)
+      return
+    }
+
 
     // サインイン処理
     try {
