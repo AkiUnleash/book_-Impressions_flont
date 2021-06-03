@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router';
 import { searchHandler } from '../../common/serch/googleapi'
 import TextField from '@material-ui/core/TextField';
@@ -22,13 +22,13 @@ type book = {
 export default function Output() {
 
   const router = useRouter();
-
   const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "", description: "" })
   const [id, setID] = useState('')
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
   const [bookid, setBookId] = useState<string>()
   const [flg, setFlg] = useState<'create' | 'update'>('create')
+  const processing = useRef(false);
 
   const onChange = (value: string) => {
     setValue(value);
@@ -118,6 +118,14 @@ export default function Output() {
   const submitHundler = (e) => {
     e.preventDefault()
 
+    // 多重クリック防止
+    if (processing.current) return;
+    processing.current = true;
+    setTimeout(() => {
+      processing.current = false;
+    }, 5000);
+
+    // 新規登録及び更新の確認
     if (flg == 'create') {
       createHandler();
     } else {
