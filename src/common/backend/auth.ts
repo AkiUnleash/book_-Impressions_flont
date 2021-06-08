@@ -61,3 +61,12 @@ export const nowdataUpdate = async (props: props) => {
     })
   })
 }
+
+// NowData
+export const nowdataDelete = async () => {
+  return await fetch(process.env.NEXT_PUBLIC_API_NOWDATA, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+}
