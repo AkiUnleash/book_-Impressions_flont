@@ -19,9 +19,11 @@ type book = {
   description: string
 }
 
-export default function Output() {
+const BookWrite: React.FC = () => {
 
   const router = useRouter();
+
+  // Hooks 
   const [result, setResult] = useState<book>({ id: "", title: "", auther: "", imageurl: "", description: "" })
   const [id, setID] = useState('')
   const [title, setTitle] = useState('')
@@ -30,10 +32,12 @@ export default function Output() {
   const [flg, setFlg] = useState<'create' | 'update'>('create')
   const processing = useRef(false);
 
+  // 感想文入力時に値挿入
   const onChange = (value: string) => {
     setValue(value);
   };
 
+  // 選択した本の情報を取得
   const bookData = async () => {
     if (bookid === undefined) { return }
 
@@ -51,6 +55,7 @@ export default function Output() {
     });
   }
 
+  // 選択した本の情報の感想文が既に無いか確認
   const impressionData = async () => {
     if (bookid === undefined) { return }
 
@@ -68,6 +73,7 @@ export default function Output() {
     }
   }
 
+  // 感想文の保存
   const createHandler = async () => {
     try {
       const inputResult = await impressionRegister({
@@ -90,6 +96,7 @@ export default function Output() {
     }
   }
 
+  // 感想文の上書き
   const updateHandler = async () => {
     try {
       const inputResult = await impressionUpdate(
@@ -133,6 +140,7 @@ export default function Output() {
     }
   }
 
+  // ページ更新時の挙動を制御
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
@@ -203,3 +211,5 @@ export default function Output() {
     </Layout>
   )
 }
+
+export default BookWrite

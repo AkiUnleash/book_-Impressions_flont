@@ -34,22 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Top() {
+const Top: React.FC = () => {
+
+  // StyleSheet
   const classes = useStyles();
 
   return (
     <Layout
       title={"技術書籍感想文（仮）"}
       Header={false}>
+
       <Grid container component="main" className={classes.root}>
-        <CssBaseline />
+
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5}  >
 
           <div className={classes.paper}>
-            <Typography component="h1" variant="h5" className={classes.title}>
-              技術書籍感想文（仮）
-          </Typography>
+            <Typography component="h1" variant="h5" className={classes.title}> 技術書籍感想文（仮） </Typography>
+
             <Alert>
               <AlertTitle>どんなサイト？</AlertTitle>
               <p>技術書籍の感想文を残すためのサイトです。</p>
@@ -74,13 +76,13 @@ export default function Top() {
               className={classes.submit}
               onClick={() => {
                 Router.push('/signup')
-              }}
-            >
-              アカウントの登録
-          </Button>
+              }} > アカウントの登録 </Button>
+
           </div>
         </Grid>
       </Grid>
+
     </Layout>
   );
 }
+export default Top

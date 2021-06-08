@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-
+// CSSコンポーネント
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: 24
@@ -20,16 +20,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const Custom404: React.FC = () => {
 
   // StyleSheet
   const classes = useStyles();
 
-
   return (
 
     <Container maxWidth="md">
+
       <Grid container justify="center" className={classes.container}>
         <Grid xs={12}>
           <div className={classes.number}>404 Page</div>
@@ -38,6 +37,7 @@ const Custom404: React.FC = () => {
           <div className={classes.massage}>このページは存在しません。</div>
         </Grid>
       </Grid>
+
     </Container>
   );
 }

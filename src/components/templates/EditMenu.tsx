@@ -7,8 +7,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { impressionDelete } from '../../common/backend/impression'
 import SimpleModal from '../organisms/Modal'
 
-const ITEM_HEIGHT = 48;
-
 type props = {
   id: string,
   bookid: string
@@ -16,38 +14,45 @@ type props = {
 
 export default function EditMenu(props: props) {
 
+  // Hooks 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const [modalopen, setModalOpen] = useState(false);
+  const open = Boolean(anchorEl);
 
+  // メニューを開く
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
+  // メニューを閉じる
   const handleClose = () => {
     setAnchorEl(null);
   }
 
+  // 編集クリック時
   const changeHandle = () => {
     Router.push(`/bookwrite/${props.bookid}`)
     setAnchorEl(null);
   };
 
+  // 削除クリック時
   const deleteHandle = () => {
     setAnchorEl(null);
     setModalOpen(true)
   }
 
+  const ITEM_HEIGHT = 48;
+
   return (
     <div>
+
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
+      > <MoreVertIcon /> </IconButton>
+
       <Menu
         id="long-menu"
         anchorEl={anchorEl}
@@ -64,6 +69,7 @@ export default function EditMenu(props: props) {
         <MenuItem onClick={changeHandle}>編集</MenuItem>
         <MenuItem onClick={deleteHandle}>削除</MenuItem>
       </Menu>
+
       <SimpleModal
         title="感想文を削除しますか？"
         massage="一度削除すると復旧することはできません。"

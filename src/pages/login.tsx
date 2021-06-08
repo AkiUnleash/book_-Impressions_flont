@@ -15,10 +15,7 @@ import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword } from '../common/validation/validation'
 import Layout from '../components/templates/Layout'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+// CSSコンポーネント
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -42,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// エラーメッセージ用のコンポーネント
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Login: React.FC = () => {
 
@@ -69,8 +70,8 @@ const Login: React.FC = () => {
       return
     }
 
-    // ログイン
     try {
+      // ログイン処理
       const loginResult = await loginHandler({ email, password })
       const responseType = loginResult.status.toString().slice(0, 1)
       if (responseType !== '2') {
@@ -79,10 +80,10 @@ const Login: React.FC = () => {
         Router.push('/home')
       }
     } catch (e) {
+      // レスポンスコードに異常があればエラーメッセージ表示
       setError(await errorResponse(e))
       return
     }
-
   }
 
   return (
@@ -99,9 +100,7 @@ const Login: React.FC = () => {
 
           {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
 
-          <Typography component="h1" variant="h5">
-            サインイン
-        </Typography>
+          <Typography component="h1" variant="h5"> サインイン </Typography>
 
           <form
             className={classes.form}
@@ -142,9 +141,8 @@ const Login: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
-            >
-              ログイン
-          </Button>
+            > ログイン </Button>
+
             <Grid container justify="center">
               <Grid item>
                 <Link href="/signup">
@@ -152,7 +150,9 @@ const Login: React.FC = () => {
               </Link>
               </Grid>
             </Grid>
+
           </form>
+
         </div>
       </Container >
     </Layout>
