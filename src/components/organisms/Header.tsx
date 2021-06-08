@@ -36,6 +36,8 @@ const Header: React.FC = () => {
   const classes = useStyles();
 
   const clickHundler = (e) => {
+
+    // 既定のイベントを無効化
     e.preventDefault()
 
     // ログイン処理
@@ -47,6 +49,7 @@ const Header: React.FC = () => {
   return (
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
+
         <Link href={'/home'}>
           <Typography
             variant="h6"

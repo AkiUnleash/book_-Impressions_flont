@@ -43,8 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function SimpleModal(props: props) {
+
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
+
   const [modalStyle] = useState(getModalStyle);
 
   const body = (
