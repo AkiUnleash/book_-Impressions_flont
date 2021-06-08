@@ -16,16 +16,13 @@ import Layout from '../components/templates/Layout'
 import Box from '@material-ui/core/Box';
 import SimpleModal from '../components/organisms/Modal'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+// CSSコンポーネント
 const useStyles = makeStyles((theme) => ({
   avatar: {
     marginTop: 24
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -35,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   box: {
-    width: 300,
+    width: '100%',
     marginTop: 24,
     textAlign: 'center'
   },
@@ -44,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// エラーメッセージ用のコンポーネント
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const ProfileEdit: React.FC = () => {
 
@@ -58,6 +59,8 @@ const ProfileEdit: React.FC = () => {
 
   // Click Handler
   const submitHundler = async (e) => {
+
+    // 既定のイベントを無効化
     e.preventDefault()
 
     // バリデーション
@@ -73,6 +76,7 @@ const ProfileEdit: React.FC = () => {
     }
 
     try {
+      // ユーザー情報の更新
       const updateResult = await nowdataUpdate({ email, username })
       const responseType = updateResult.status.toString().slice(0, 1)
       if (responseType !== '2') {
@@ -81,14 +85,15 @@ const ProfileEdit: React.FC = () => {
         Router.push('/home')
       }
     } catch (e) {
+      // レスポンスコードに異常があればエラーメッセージ表示
       setError(await errorResponse(e))
       return
     }
 
   }
 
+  // 現状のユーザー情報を取得する。
   const profileData = async () => {
-
     const result = await nowdataGet()
     const data = await result.json();
 
@@ -111,6 +116,7 @@ const ProfileEdit: React.FC = () => {
       Header={true}>
 
       <Container component="main" maxWidth="xs">
+        {/* アバター */}
         <Grid container justify="center">
           <Grid item xs={3} className={classes.avatar}
           >
@@ -123,6 +129,7 @@ const ProfileEdit: React.FC = () => {
           </Grid>
         </Grid>
 
+        {/* エラーメッセージ */}
         <Grid container justify="center">
           {error && <Alert className={classes.error} severity="warning">{error}</Alert>}
         </Grid>
@@ -130,6 +137,7 @@ const ProfileEdit: React.FC = () => {
         <Grid container justify="center">
           <Typography component="h1" variant="h5"> プロフィールの修正 </Typography>
         </Grid>
+
         <form
           className={classes.form}
           noValidate
@@ -174,6 +182,7 @@ const ProfileEdit: React.FC = () => {
             </Grid>
           </Grid>
         </form>
+
         <Grid container justify="center">
           <Box borderTop={1} className={classes.box}>
             <Button
@@ -185,6 +194,7 @@ const ProfileEdit: React.FC = () => {
             > ユーザーの削除 </Button>
           </Box>
         </Grid>
+
         <SimpleModal
           title="このアカウントを削除しますか？"
           massage="一度削除すると復旧することはできません。"

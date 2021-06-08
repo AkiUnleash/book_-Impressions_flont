@@ -8,6 +8,24 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+type props = {
+  path: string,
+  id: string,
+  title: string,
+  author: string,
+  imageurl: string
+}
+
+// CSSコンポーネント
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 180,
+  },
+});
+
 const theme = createMuiTheme({
   typography: {
     h2: {
@@ -18,23 +36,6 @@ const theme = createMuiTheme({
     }
   }
 })
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 180,
-  },
-});
-
-type props = {
-  path: string,
-  id: string,
-  title: string,
-  author: string,
-  imageurl: string
-}
 
 const Bookcard = (props: props) => {
 

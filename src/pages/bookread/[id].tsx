@@ -28,6 +28,8 @@ type bookinfomation = {
 export default function Output() {
 
   const router = useRouter();
+
+  // Hooks 
   const [impression, setImpression] = useState<impression>({
     id: "",
     bookid: "",
@@ -46,6 +48,7 @@ export default function Output() {
 
   const [id, setId] = useState<string>()
 
+  // 選択している感想文データの取得
   const impressionData = async () => {
 
     if (id === undefined) { return }
@@ -54,7 +57,6 @@ export default function Output() {
     if (impressionResult.status.toString() !== '200') { return }
     const impressionData = await impressionResult.json();
     setImpression(impressionData);
-
 
     const keyword = impressionData.bookid
     const maxResults = 0
@@ -68,8 +70,10 @@ export default function Output() {
       imageurl: bookData.volumeInfo.imageLinks ? bookData.volumeInfo.imageLinks.smallThumbnail : "",
       description: bookData.volumeInfo.description,
     });
+
   }
 
+  // ページ更新時の挙動を制御
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {

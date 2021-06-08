@@ -16,10 +16,7 @@ import { errorResponse } from '../common/backend/error';
 import { isEmail, isPassword, isUsername } from '../common/validation/validation'
 import Layout from '../components/templates/Layout'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+// CSSコンポーネント
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -43,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// エラーメッセージ用のコンポーネント
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Signup: React.FC = () => {
 
@@ -57,6 +58,8 @@ const Signup: React.FC = () => {
 
   // Click Handler
   const sumitHundler = async (e) => {
+
+    // 既定のイベントを無効化
     e.preventDefault()
 
     // バリデーション
@@ -77,15 +80,16 @@ const Signup: React.FC = () => {
     }
 
 
-    // サインイン処理
     try {
 
+      // サインイン処理
       const signinResult = await signupHandler({ email, password, username })
       let responseType = signinResult.status.toString().slice(0, 1)
       if (responseType !== '2') {
         throw (signinResult)
       }
 
+      // サインインしたデータで、ログイン処理。
       const loginResult = await loginHandler({ email, password })
       responseType = loginResult.status.toString().slice(0, 1)
       if (responseType !== '2') {
@@ -95,6 +99,7 @@ const Signup: React.FC = () => {
       }
 
     } catch (e) {
+      // レスポンスコードに異常があればエラーメッセージ表示
       setError(await errorResponse(e))
       return
     }
@@ -171,9 +176,8 @@ const Signup: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
-            >
-              登録
-          </Button>
+            > 登録 </Button>
+
             <Grid container justify="center">
               <Grid item>
                 <Link href="/login">
