@@ -5,13 +5,16 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MuiAlert from '@material-ui/lab/Alert';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { isEmail, isUsername } from '../common/validation/validation'
-import { nowdataGet, nowdataUpdate } from '../common/backend/auth'
+import { nowdataGet, nowdataUpdate, nowdataDelete } from '../common/backend/auth'
 import { errorResponse } from '../common/backend/error';
 import Layout from '../components/templates/Layout'
+import Box from '@material-ui/core/Box';
+import SimpleModal from '../components/organisms/Modal'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   error: {
     margin: theme.spacing(3, 0, 2),
   },
+  box: {
+    width: 300,
+    marginTop: 24,
+    textAlign: 'center'
+  },
+  deletebutton: {
+    marginTop: 32
+  },
 }));
 
 
@@ -43,6 +54,7 @@ const ProfileEdit: React.FC = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
+  const [modalopen, setModalOpen] = useState(false);
 
   // Click Handler
   const submitHundler = async (e) => {
@@ -162,6 +174,27 @@ const ProfileEdit: React.FC = () => {
             </Grid>
           </Grid>
         </form>
+        <Grid container justify="center">
+          <Box borderTop={1} className={classes.box}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              className={classes.deletebutton}
+              startIcon={<DeleteIcon />}
+              onClick={() => { setModalOpen(true) }}
+            > ユーザーの削除 </Button>
+          </Box>
+        </Grid>
+        <SimpleModal
+          title="このアカウントを削除しますか？"
+          massage="一度削除すると復旧することはできません。"
+          open={modalopen}
+          falseClick={() => { setModalOpen(false) }}
+          trueClick={async () => {
+            await Router.push('/')
+            await nowdataDelete()
+          }}
+        />
       </Container >
 
     </Layout>
