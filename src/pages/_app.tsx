@@ -14,6 +14,8 @@ export default function MyApp(props) {
     const response = await nowdataGet()
     const status = response.status.toString();
 
+    console.log(Component.name);
+
     if (
       (status === '200') && (
         Component.name == 'Top' ||
