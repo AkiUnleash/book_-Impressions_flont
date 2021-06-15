@@ -14,8 +14,6 @@ export default function MyApp(props) {
     const response = await nowdataGet()
     const status = response.status.toString();
 
-    console.log(router.asPath);
-
     if (
       (status === '200') && (
         router.asPath == '/' ||
