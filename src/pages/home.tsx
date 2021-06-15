@@ -77,7 +77,7 @@ const Home: React.FC = () => {
   return (
 
     <Layout
-      title={"ホーム｜技術書籍感想文（仮）"}
+      title={"ホーム｜技術書籍感想文"}
       Header={true}>
 
       <Container maxWidth="md">

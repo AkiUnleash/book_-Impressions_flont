@@ -55,7 +55,7 @@ const Header: React.FC = () => {
             variant="h6"
             color="inherit"
             noWrap
-            className={classes.toolbarTitle}> 技術書籍感想文（仮）</Typography>
+            className={classes.toolbarTitle}> 技術書籍感想文</Typography>
         </Link>
 
         <Button href="#"

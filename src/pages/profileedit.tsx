@@ -112,7 +112,7 @@ const ProfileEdit: React.FC = () => {
   return (
 
     <Layout
-      title={"プロフィールの編集｜技術書籍感想文（仮）"}
+      title={"プロフィールの編集｜技術書籍感想文"}
       Header={true}>
 
       <Container component="main" maxWidth="xs">

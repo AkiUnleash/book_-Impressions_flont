@@ -88,7 +88,7 @@ const Login: React.FC = () => {
 
   return (
     <Layout
-      title={"ログイン｜技術書籍感想文（仮）"}
+      title={"ログイン｜技術書籍感想文"}
       Header={false}>
 
       <Container component="main" maxWidth="xs">
@@ -147,7 +147,7 @@ const Login: React.FC = () => {
               <Grid item>
                 <Link href="/signup">
                   ユーザー登録はこちらへ
-              </Link>
+                </Link>
               </Grid>
             </Grid>
 
