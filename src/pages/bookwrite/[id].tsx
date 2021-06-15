@@ -162,7 +162,7 @@ const BookWrite: React.FC = () => {
 
   return (
     <Layout
-      title={`${result.title}｜投稿｜技術書籍感想文（仮）`}
+      title={`${result.title}｜投稿｜技術書籍感想文`}
       Header={true}>
 
       <Container maxWidth="md">

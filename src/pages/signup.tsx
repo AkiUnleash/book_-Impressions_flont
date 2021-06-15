@@ -108,7 +108,7 @@ const Signup: React.FC = () => {
   return (
 
     <Layout
-      title={"サインアップ｜技術書籍感想文（仮）"}
+      title={"サインアップ｜技術書籍感想文"}
       Header={false}>
 
       <Container component="main" maxWidth="xs">
@@ -122,7 +122,7 @@ const Signup: React.FC = () => {
 
           <Typography component="h1" variant="h5">
             アカウントの作成
-        </Typography>
+          </Typography>
 
           <form
             className={classes.form}
@@ -182,7 +182,7 @@ const Signup: React.FC = () => {
               <Grid item>
                 <Link href="/login">
                   ログインはこちらへ
-              </Link>
+                </Link>
               </Grid>
             </Grid>
           </form>

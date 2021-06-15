@@ -94,7 +94,7 @@ export default function Output() {
 
   return (
     <Layout
-      title={`${impression.booktitle}｜閲覧｜技術書籍感想文（仮）`}
+      title={`${impression.booktitle}｜閲覧｜技術書籍感想文`}
       Header={true}>
 
       <Container maxWidth="md">

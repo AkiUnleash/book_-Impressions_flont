@@ -41,7 +41,7 @@ const Top: React.FC = () => {
 
   return (
     <Layout
-      title={"技術書籍感想文（仮）"}
+      title={"技術書籍感想文"}
       Header={false}>
 
       <Grid container component="main" className={classes.root}>
@@ -50,7 +50,7 @@ const Top: React.FC = () => {
         <Grid item xs={12} sm={8} md={5}  >
 
           <div className={classes.paper}>
-            <Typography component="h1" variant="h5" className={classes.title}> 技術書籍感想文（仮） </Typography>
+            <Typography component="h1" variant="h5" className={classes.title}> 技術書籍感想文 </Typography>
 
             <Alert>
               <AlertTitle>どんなサイト？</AlertTitle>
