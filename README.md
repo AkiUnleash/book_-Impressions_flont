@@ -46,6 +46,12 @@
 - [キックオフ](https://drive.google.com/file/d/1FPf8qS8_9-phvvcSqlxaWNJepr4lX_Ff/view?usp=sharing)
 - [（詳細）仕様書](https://drive.google.com/file/d/1Yms36qpE3XEarAj4ApzjPpoOB6Uiq2X5/view?usp=sharing)
 
+## 注意事項
+
+- 推奨ブラウザは Chrome です。
+
+- iOS で使用される場合は、設定 →Safari→ サイト超えトラッキングを防ぐをオフにしてご使用ください。
+
 ## ライセンス
 
 [MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
