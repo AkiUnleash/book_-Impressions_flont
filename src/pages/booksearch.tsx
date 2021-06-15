@@ -53,7 +53,7 @@ const Home: React.FC = () => {
 
   return (
     <Layout
-      title={"本の検索｜技術書籍感想文（仮）"}
+      title={"本の検索｜技術書籍感想文"}
       Header={true}>
 
       <Container maxWidth="md">
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
                     color="primary"
                     className={classes.button}>
                     検索
-                </Button>
+                  </Button>
                 </Grid>
               </Grid>
             </form>
