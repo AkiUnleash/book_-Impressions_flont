@@ -8,26 +8,26 @@ import theme from '../common/theme';
 import { nowdataGet } from '../common/backend/auth'
 
 export default function MyApp(props) {
-  const { Component, pageProps } = props;
+  const { Component, pageProps, router } = props;
 
   const chackLogin = async () => {
     const response = await nowdataGet()
     const status = response.status.toString();
 
-    console.log(Component.name);
+    console.log(router.asPath);
 
     if (
       (status === '200') && (
-        Component.name == 'Top' ||
-        Component.name == 'Login' ||
-        Component.name == 'Signup')
+        router.asPath == '/' ||
+        router.asPath == '/login' ||
+        router.asPath == '/signup')
     ) {
       Router.push('/home')
     } else if (
       (status === '401') && (
-        Component.name != 'Top' &&
-        Component.name != 'Login' &&
-        Component.name != 'Signup')
+        router.asPath != '/' &&
+        router.asPath != '/login' &&
+        router.asPath != '/signup')
     ) {
       Router.push('/login')
     }
